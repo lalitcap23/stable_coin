@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[account]
-#[derive(initspace,debug)]
+#[derive(InitSpace,Debug)]
 pub struct Collateral {
     pub depositor: Pubkey,
     pub sol_account: Pubkey,
@@ -12,3 +12,5 @@ pub struct Collateral {
     pub bump: u8,
     pub bump_sol_amount: u8,
 }
+
+ 
