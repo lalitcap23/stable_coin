@@ -12,3 +12,4 @@ pub struct Config{
     pub bump_mint_acount: u8,
 
 }
+ 

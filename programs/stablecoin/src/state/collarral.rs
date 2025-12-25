@@ -5,7 +5,7 @@ use anchor_lang::prelude::*;
 pub struct Collateral {
     pub depositor: Pubkey,
     pub sol_account: Pubkey,
-    pub token_account: Pubkey,// ata acount for hte depo
+    pub token_account: Pubkey,// ata acount for hte depositor 
     pub lamports_balance: u64,
     pub amount_minted: u64,
     pub is_initialized: bool,
