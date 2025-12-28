@@ -16,6 +16,6 @@ pub mod stablecoin {
     use super::*;
 
     pub fn initialize(ctx: Context<InitializeConfig>) -> Result<()> {
-        initialize_config::process_initialize_config(ctx)
+        Ok(())
     }
 }

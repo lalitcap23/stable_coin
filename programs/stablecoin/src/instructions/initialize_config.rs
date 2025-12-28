@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 use crate::constants::*;
+use anchor_spl::token_interface::{Mint,Token2022};
 
 #[derive(Accounts)]
 pub struct InitializeConfig<'info> {
@@ -29,11 +30,11 @@ pub struct InitializeConfig<'info> {
 
     )]
     pub mint_account: Account<'info, Mint>,
-    pub token_program: Program<'info, Token>,
+    pub token_program: Program<'info, Token2022>,
     pub system_program: Program<'info, System>,
 }
  
 pub imp<'info> InitializeConfig<'info> {
-    Ok(())  
+    Ok(())   
 }
-                   
+                     
