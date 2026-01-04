@@ -1,14 +1,15 @@
 use anchor_lang::prelude::*;
 use crate::constants::*;
 use anchor_spl::token_interface::{Mint,Token2022};
-
+use crate::state::config::Config;
 #[derive(Accounts)]
 pub struct InitializeConfig<'info> {
     #[account(mut)]
     pub authority: Signer<'info>,
 
     #[account(
-        init,       payer = authority,
+        init,   
+        payer = authority,
         seeds = [SEED_CONFIG_ACCOUNT],
         bump,
         space = 8 + Config::INIT_SPACE, // Add space as needed
@@ -16,7 +17,6 @@ pub struct InitializeConfig<'info> {
     pub config_account:Account<'info,Config>,// it is the first config account to inititialize the program
 
 
- 
     #[account(
         init,
         payer = authority,
@@ -33,16 +33,18 @@ pub struct InitializeConfig<'info> {
     pub system_program: Program<'info, System>,
 }
  
-impl<'info> InitializeConfig<'info> {
-    pub fn process(&mut self,liquidity_threshold:u64,liquidity_bonus:u64,min_heath_factor:u64)->Result<()>{
-        let config_account = &mut self.config_account;
-        config_account.authority = self.authority.key();
-        config_account.mint_account = self.mint_account.key();
-        config_account.liquidity_threshold = liquidity_threshold;
-        config_account.liquidity_bonus = liquidity_bonus;
-        config_account.min_heath_factor = min_heath_factor;
+pub fn process_initialize_config(ctx: Context<InitializeConfig>) -> Result<()> {
+    *ctx.accounts.config_account = Config{
+     authority: ctx.accounts.authority.key(),
+      mint_account: ctx.accounts.mint_account.key(),
+      liquidity_threshold: LIQUIDITY_THRESHOLD,
+        liquidity_bonus: LIQUIDITY_BONUS,
+        min_heath_factor: MIN_HEALTH_FACTOR,
+        bump: ctx.bumps.config_account,
+        bump_mint_acount: ctx.bumps.mint_account,
 
-        Ok(())
-    }
+
+    };
+    Ok(())
 }
                      

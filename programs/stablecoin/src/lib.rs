@@ -15,7 +15,8 @@ declare_id!("2Wg97zfSSFgdcSyHcefD9dgafn5iXwjyQzpfzuX8tqjm");
 pub mod stablecoin {
     use super::*;
 
-    pub fn initialize(ctx: Context<InitializeConfig>) -> Result<()> {
-        Ok(())
-    }
+pub fn intialize_config(ctx: Context<InitializeConfig>) -> Result<()>{
+    process_initialize_config(ctx)
+
+}
 }
