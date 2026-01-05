@@ -1,5 +1,5 @@
-pub mod collarral;
+pub mod collateral;
 pub mod config;
 
 pub use config::*;
-pub use collarral::*;
+pub use collateral::*;

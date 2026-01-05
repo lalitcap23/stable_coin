@@ -7,7 +7,6 @@ pub struct UpdateConfig<'info>{
         mut,
         seeds = [SEED_CONFIG_ACCOUNT],
         bump = config_account.bump,
-        has_one = authority,
     }]
     pub config_account: Account<'info,Config>,
 }
@@ -17,6 +16,7 @@ pub struct UpdateConfig<'info>{
  let config_account = &mut ctx.accounts.config_account;
  
   config_account.min_health_factor = min_health_factor;
+  
  Ok(())
  }
 

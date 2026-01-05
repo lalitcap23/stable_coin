@@ -7,6 +7,7 @@ pub const SEED_MINT_ACCOUNT: &[u8] = b"mint_account";
 
 pub const MINT_DECIMALS: u8 = 9;
 
+pub const SEED_COLLATERAL_ACCOUNT: &[u8] = b"collateral_account";
 
 pub const LIQUIDITY_BONUS: u64 = 50; // 0.5% bonus
 
