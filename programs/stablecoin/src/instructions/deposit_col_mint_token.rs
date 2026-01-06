@@ -25,6 +25,10 @@ pub struct DepositColMintToken<'info>{
      bump,
 
     )]
+    #[account(
+        mut, 
+        seeds =[SEED_SOL_ACCOUNT,  depositor.key().as_ref()],
+    )] 
     pub collateral_account: Account<'info, Collateral>,
     pub system_program: Program<'info, System>,
 
