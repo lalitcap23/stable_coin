@@ -42,9 +42,6 @@ pub fn process_initialize_config(ctx: Context<InitializeConfig>) -> Result<()> {
         min_heath_factor: MIN_HEALTH_FACTOR,
         bump: ctx.bumps.config_account,
         bump_mint_acount: ctx.bumps.mint_account,
-
-
     };
     Ok(())
 }
-                     
