@@ -7,6 +7,7 @@ use crate::{collateral, constants::*};
 use anchor_spl::token_interface::Mint;
 use crate::state::config::Config;
 use crate::state::collateral::Collateral;
+use crate::utils::mint_deposit::{mint_token, deposit_sol};
 
 #[derive(Accounts)]
 pub struct DepositColMintToken<'info>{
@@ -60,8 +61,8 @@ pub struct DepositColMintToken<'info>{
    -> Result<()>{
 
     let collateral_account =&mut ctx.accounts.collateral_account;
-     collateral_account.lamports_balance = ctx.accounts.sol_account + amount_collateral;
-     collateral_accoount.amount_minted += amount_to_mint;
+     collateral_account.lamports_balance = ctx.accounts.sol_account.lamports() + amount_collateral;
+     collateral_account.amount_minted += amount_to_mint;
  
     
     if !collateral_account.is_initialized{
@@ -73,8 +74,21 @@ pub struct DepositColMintToken<'info>{
 
     }
 
+deposit_sol(
+    &ctx.accounts.depositor,
+    &ctx.accounts.sol_account,
+    &ctx.accounts.system_program,
+    amount_collateral,
+)?;
 
+ mint_token(
+    ctx.accounts.mint_account,
+    ctx.accounts.token_account.interface_account(),
+    ctx.accounts.token_program,
+    ctx.accounts.config_account.bump_mint_account,
+    amount_to_mint,
+ )?;
 
-Ok(())
+ Ok(())
    }
  
